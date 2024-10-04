@@ -54,11 +54,11 @@ function mostraPergunta(){
     perguntaAtual = perguntas[posicao];
     caixaPergunta.textContent = perguntaAtual.enunciado;
     caixaAlternativa.textContent = " "; 
-    mostraAlternativa();
+    mostraAlternativas();
 }
-function mostraAlternativa(){
-    for(const alternativa of perguntaAtual.alternativa){
-        const botaoAlternativas = document.createElement;("button");
+function mostraAlternativas(){
+    for(const alternativa of perguntaAtual.alternativas){
+        const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
         botaoAlternativas.addEventListener("click", ()=> respostasSelecionadas(alternativa));
         caixaAlternativa.appendChild(botaoAlternativas); 
@@ -66,11 +66,13 @@ function mostraAlternativa(){
 }
 function respostasSelecionadas(opcaoselecionada){
     const afirmacoes = opcaoselecionada.afirmação;
-    respostas = afirmacoes; 
+    respostas += afirmacoes + " "; 
     posicao++;
     mostraPergunta();
 }
 function mostraResultado(){
-    caixaPergunta.textContent = "continearei lendo meus livros em momentos de lazer"
+    caixaPergunta.textContent = "confira aqui suas respostas";
+    textoResultado.textContent = respostas;
+    caixaAlternativa.textContent = "";
 }
 mostraPergunta();
