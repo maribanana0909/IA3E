@@ -8,11 +8,11 @@ const perguntas = [//abre a lista de objetos (itens)
         enunciado:"você gosta de ler livros?",
         alternativas:[{
             texto:"sim",
-            afirmação:"por que é meu momento de lazer"
+            afirmação:"porque é meu momento de lazer"
         },
         {
             texto:"não",
-            afirmação: "por que não tenho paciência"
+            afirmação: "porque não tenho paciência"
         }
         ]   
     },
@@ -20,11 +20,11 @@ const perguntas = [//abre a lista de objetos (itens)
         enunciado:"você gosta de ir ao cinema?",
         alternativas:[{
             texto:"sim",
-            afirmação: "por que é meu momento de lazer"
+            afirmação: "porque é meu momento de lazer"
         },
         {
             texto: "não",
-            afirmação: "por que não gosto de sair de casa"
+            afirmação: "porque não gosto de sair de casa"
         }
         ]
     },
@@ -32,32 +32,45 @@ const perguntas = [//abre a lista de objetos (itens)
         enunciado:"você ouve música regularmente?",
         alternativas:[{
             texto:"sim",
-             afirmação: "por que me espairece"
+             afirmação: "porque me espairece"
     },
     { 
            texto:"não",
-           afirmação: "por que so me irrita"
+           afirmação: "porque so me irrita"
     }
 ]
     }
 ]
 let posicao = 0;
 let perguntaAtual;
+let respostas = "";
 
 
 function mostraPergunta(){
+    if (posicao>=perguntas.length){
+        mostraResultado();
+        return;
+    }
     perguntaAtual = perguntas[posicao];
     caixaPergunta.textContent = perguntaAtual.enunciado;
-    mostraAlternativa();{}
+    caixaAlternativa.textContent = " "; 
+    mostraAlternativa();
 }
 function mostraAlternativa(){
-    for(const alternativa of paerguntaAtual.alternativa){
-        const botaoAlternativas = document.createElement;("button")
+    for(const alternativa of perguntaAtual.alternativa){
+        const botaoAlternativas = document.createElement;("button");
         botaoAlternativas.textContent = alternativa.texto;
-        botaoAlternativas.addEventListener("click", funcion(){
-           posicao++; 
-        });
-        caixaAlternativa. appendChild(botaoAlternativa); 
+        botaoAlternativas.addEventListener("click", ()=> respostasSelecionadas(alternativa));
+        caixaAlternativa.appendChild(botaoAlternativas); 
     }
+}
+function respostasSelecionadas(opcaoselecionada){
+    const afirmacoes = opcaoselecionada.afirmação;
+    respostas = afirmacoes; 
+    posicao++;
+    mostraPergunta();
+}
+function mostraResultado(){
+    caixaPergunta.textContent = "continearei lendo meus livros em momentos de lazer"
 }
 mostraPergunta();
